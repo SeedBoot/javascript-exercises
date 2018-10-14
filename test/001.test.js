@@ -1,5 +1,5 @@
 // ------------------------------------
-// All tests below expect a function 
+// All tests below expect a function
 // called `fn` which takes a single
 // parameter `input` and returns
 // `output`.
@@ -32,12 +32,17 @@ describe('tests', () => {
         const input = ['one', 'two', 'three'];
         const output = ['ONE', 'TWO', 'THREE'];
 
+        const fn = strings => strings.map(string => string.toUpperCase());
+
         expect(fn(input)).toEqual(output);
     });
 
     it('002 / an array of things, prefixed with their index + 1 and a dash', () => {
         const input = ['one', 'two', 'three'];
         const output = ['1-one', '2-two', '3-three'];
+
+        const fn = strings =>
+            strings.map((string, i) => `${i + 1}-${string}`);
 
         expect(fn(input)).toEqual(output);
     });
@@ -56,6 +61,8 @@ describe('tests', () => {
             'Berocca Orange - 45 effervescent tablets',
             'JT Vits Re-Energise Orange 20 tablets',
         ];
+
+        const fn = products => products.map(product => product.name)
 
         expect(fn(input)).toEqual(output);
     });
@@ -77,6 +84,8 @@ describe('tests', () => {
             ]
         }
 
+        const fn = input => ({ products: [...input] })
+
         expect(fn(input)).toEqual(output);
     });
 
@@ -97,6 +106,8 @@ describe('tests', () => {
             ]
         }
 
+        const fn = prods => ({ products: prods.map(prod => prod.name) })
+
         expect(fn(input)).toEqual(output);
     });
 
@@ -116,6 +127,13 @@ describe('tests', () => {
                 { id: 'p004', name: 'JT Vits Re-Energise Orange 20 tablets', inStock: true },
             ]
         }
+
+        const fn = prods => ({
+            products: prods.map(prod => ({
+                ...prod,
+                inStock: true
+            }))
+        });
 
         expect(fn(input)).toEqual(output);
     });
